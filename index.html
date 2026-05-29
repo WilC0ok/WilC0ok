@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ashes of the Cold War</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Browser grand strategy prototype</p>
+        <h1>Ashes of the Cold War</h1>
+        <p class="lede">
+          World War III has begun. The United States is wounded, Moscow is
+          gambling on a decisive European realignment, and Germany stands
+          between survival, sovereignty, and catastrophe.
+        </p>
+      </div>
+      <button id="new-game" class="primary-button">Begin Emergency Session</button>
+    </header>
+
+    <main class="game-shell">
+      <section class="panel status-panel" aria-label="National status">
+        <div>
+          <span class="label">Turn</span>
+          <strong id="turn">1</strong>
+        </div>
+        <div>
+          <span class="label">Date</span>
+          <strong id="date">Nov 1983</strong>
+        </div>
+        <div>
+          <span class="label">Political Power</span>
+          <strong id="political-power">45</strong>
+        </div>
+        <div>
+          <span class="label">Stability</span>
+          <strong id="stability">58%</strong>
+        </div>
+        <div>
+          <span class="label">War Support</span>
+          <strong id="war-support">42%</strong>
+        </div>
+        <div>
+          <span class="label">Escalation</span>
+          <strong id="escalation">36%</strong>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <article class="panel">
+          <div class="section-heading">
+            <p class="eyebrow">German Emergency Council</p>
+            <h2>Choose a national direction</h2>
+          </div>
+          <p>
+            Each focus advances the political story and shifts your national
+            position. Pick carefully: Germany's path can strengthen NATO,
+            invite Soviet guarantees, or create a third European bloc.
+          </p>
+          <div id="focus-list" class="card-list"></div>
+        </article>
+
+        <article class="panel map-panel">
+          <div class="section-heading">
+            <p class="eyebrow">Strategic map</p>
+            <h2>Europe after the first strike</h2>
+          </div>
+          <div class="map" aria-label="Simplified strategic map of Europe">
+            <button class="region nato" data-region="United Kingdom">UK</button>
+            <button class="region nato" data-region="France">FR</button>
+            <button class="region contested" data-region="West Germany">WG</button>
+            <button class="region pact" data-region="East Germany">EG</button>
+            <button class="region pact" data-region="Poland">PL</button>
+            <button class="region neutral" data-region="Scandinavia">SC</button>
+            <button class="region pact" data-region="Baltics">BA</button>
+            <button class="region danger" data-region="Fallout corridor">☢</button>
+          </div>
+          <p id="region-detail" class="intel-box">
+            Select a region to inspect its current strategic situation.
+          </p>
+        </article>
+      </section>
+
+      <section class="grid-two">
+        <article class="panel">
+          <div class="section-heading">
+            <p class="eyebrow">Cabinet actions</p>
+            <h2>Spend political power</h2>
+          </div>
+          <div id="action-list" class="card-list compact"></div>
+        </article>
+
+        <article class="panel">
+          <div class="section-heading">
+            <p class="eyebrow">Situation room</p>
+            <h2>Event log</h2>
+          </div>
+          <ol id="event-log" class="event-log"></ol>
+          <button id="next-turn" class="secondary-button">Advance One Month</button>
+        </article>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

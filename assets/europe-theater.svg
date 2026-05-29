@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">European theater map</title>
+  <desc id="desc">A stylized strategic theater map with NATO, Warsaw Pact, neutral, and fallout zones.</desc>
+  <defs>
+    <linearGradient id="ocean" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101826"/>
+      <stop offset="1" stop-color="#18243a"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <rect width="900" height="560" rx="28" fill="url(#ocean)"/>
+  <g opacity="0.28" stroke="#f2f5f9" stroke-width="1">
+    <path d="M0 90 H900M0 180 H900M0 270 H900M0 360 H900M0 450 H900"/>
+    <path d="M110 0 V560M220 0 V560M330 0 V560M440 0 V560M550 0 V560M660 0 V560M770 0 V560"/>
+  </g>
+  <g filter="url(#shadow)" stroke="#ffffff" stroke-opacity="0.18" stroke-width="3">
+    <path d="M120 230 L190 175 L245 210 L230 300 L160 330 Z" fill="#3868a8"/>
+    <path d="M230 310 L320 260 L380 320 L345 410 L245 415 Z" fill="#3868a8"/>
+    <path d="M390 255 L500 235 L545 335 L470 405 L372 355 Z" fill="#c8943f"/>
+    <path d="M535 220 L642 205 L690 290 L650 385 L545 338 Z" fill="#9f372f"/>
+    <path d="M660 190 L800 178 L830 330 L700 382 L682 282 Z" fill="#9f372f"/>
+    <path d="M420 72 L580 48 L690 122 L640 192 L470 178 Z" fill="#3d8a62"/>
+    <path d="M718 64 L835 92 L828 168 L690 142 Z" fill="#9f372f"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-weight="800" font-size="22" fill="#f2f5f9">
+    <text x="150" y="260">UK</text>
+    <text x="285" y="350">FR</text>
+    <text x="433" y="320">WG</text>
+    <text x="578" y="300">EG</text>
+    <text x="735" y="292">PL</text>
+    <text x="520" y="135">SC</text>
+    <text x="735" y="126">BA</text>
+  </g>
+  <g opacity="0.9">
+    <path d="M455 444 C540 390 626 420 705 370" fill="none" stroke="#8e72d6" stroke-width="20" stroke-linecap="round" stroke-opacity="0.28"/>
+    <path d="M455 444 C540 390 626 420 705 370" fill="none" stroke="#c9b6ff" stroke-width="3" stroke-linecap="round" stroke-dasharray="10 14"/>
+    <text x="515" y="470" font-family="Arial, sans-serif" font-weight="800" font-size="20" fill="#c9b6ff">FALLOUT CORRIDOR</text>
+  </g>
+  <g transform="translate(42 442)" font-family="Arial, sans-serif" font-size="17" fill="#f2f5f9">
+    <rect width="265" height="76" rx="16" fill="#0b1018" opacity="0.78"/>
+    <circle cx="28" cy="24" r="8" fill="#3868a8"/><text x="44" y="30">NATO-aligned</text>
+    <circle cx="28" cy="52" r="8" fill="#9f372f"/><text x="44" y="58">Warsaw Pact pressure</text>
+  </g>
+</svg>

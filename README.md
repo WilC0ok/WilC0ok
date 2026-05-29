@@ -20,7 +20,9 @@ Germany is the first playable focus of the prototype. The player leads an emerge
 
 ## Run Locally
 
-Open `index.html` in a browser, or serve the folder with any static file server:
+Open `index.html` directly in a browser. The playable prototype is bundled into that one file so it still looks correct if you download or share only the HTML file.
+
+You can also serve the folder with any static file server:
 
 ```bash
 python3 -m http.server 8000

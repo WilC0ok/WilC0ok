@@ -10,13 +10,16 @@ Germany is the first playable focus of the prototype. The player leads an emerge
 
 ## Current MVP Features
 
-- Static browser app with no build step.
+- Self-contained browser app with no build step.
+- Cleaner briefing-to-situation-room play flow.
+- Custom SVG artwork for the command room, European theater map, and emergency council seal, with the artwork embedded into the playable HTML and kept in `assets/` as editable source files.
 - German emergency-council status dashboard.
 - Political power, stability, war support, and nuclear escalation meters.
-- National focus choices with immediate mechanical effects.
+- National focus choices with immediate mechanical and faction effects.
 - Cabinet actions that spend political power.
-- Simplified clickable Europe strategy map.
-- Monthly turn advancement and event log.
+- Internal faction pressure display.
+- Clickable Europe theater intelligence controls.
+- Monthly turn advancement, objectives, toast feedback, and event log.
 
 ## Run Locally
 
@@ -35,7 +38,7 @@ Then visit `http://localhost:8000`.
 Near-term additions could include:
 
 1. Save/load support with `localStorage`.
-2. A larger focus tree with mutually exclusive paths.
-3. Faction influence for NATO loyalists, neutralists, pro-Soviet negotiators, and reunification hardliners.
-4. Region-level resources, unrest, and fallout.
+2. A larger focus tree with mutually exclusive paths and unlock requirements.
+3. Region-level resources, unrest, and fallout.
+4. More scenario art for leaders, events, and ideology paths.
 5. Additional playable countries after Germany feels fun.

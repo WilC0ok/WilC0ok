@@ -7,120 +7,258 @@
     <style>
 :root {
   color-scheme: dark;
-  --bg: #10131a;
-  --panel: #1a202d;
-  --panel-strong: #242d3d;
-  --text: #f2f5f9;
-  --muted: #aeb8c7;
+  --bg: #0c1017;
+  --bg-2: #111827;
+  --panel: rgba(20, 27, 39, 0.9);
+  --panel-strong: #202a3a;
+  --panel-soft: rgba(255, 255, 255, 0.055);
+  --text: #f4f7fb;
+  --muted: #b3bdcc;
+  --faint: #7f8b9d;
   --accent: #d34c3f;
   --accent-2: #f0b84f;
   --green: #5ab67d;
   --blue: #5b8fd9;
   --purple: #8e72d6;
-  --border: rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.13);
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(211, 76, 63, 0.24), transparent 28rem),
-    radial-gradient(circle at top right, rgba(91, 143, 217, 0.2), transparent 26rem),
-    var(--bg);
+    radial-gradient(circle at top left, rgba(211, 76, 63, 0.22), transparent 30rem),
+    radial-gradient(circle at top right, rgba(91, 143, 217, 0.18), transparent 28rem),
+    linear-gradient(180deg, var(--bg-2), var(--bg));
   color: var(--text);
 }
 
-button {
-  font: inherit;
+body::before {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
 }
 
-.hero,
-.game-shell {
-  width: min(1180px, calc(100% - 32px));
+button { font: inherit; }
+
+.hidden { display: none !important; }
+
+.app-header,
+.game-shell,
+.briefing-screen {
+  width: min(1220px, calc(100% - 32px));
   margin-inline: auto;
 }
 
-.hero {
+.app-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  padding: 48px 0 28px;
+  gap: 1rem;
+  padding: 22px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand img {
+  width: 54px;
+  height: 54px;
+}
+
+.brand-title {
+  margin: 0;
+  font-size: 1.08rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.brand-subtitle,
+.eyebrow,
+.label,
+.small-label {
+  color: var(--accent-2);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.brand-subtitle {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.briefing-screen {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+  gap: 22px;
+  padding: 18px 0 44px;
+}
+
+.briefing-copy,
+.briefing-art,
+.panel,
+.stat-card,
+.objective-card {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.briefing-copy {
+  display: grid;
+  align-content: center;
+  min-height: 610px;
+  border-radius: 32px;
+  padding: clamp(24px, 5vw, 54px);
 }
 
 h1,
 h2,
-p {
-  margin-top: 0;
-}
+h3,
+p { margin-top: 0; }
 
 h1 {
-  max-width: 760px;
-  margin-bottom: 12px;
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
-  line-height: 0.9;
-  letter-spacing: -0.07em;
+  max-width: 860px;
+  margin-bottom: 18px;
+  font-size: clamp(3rem, 9vw, 6.9rem);
+  line-height: 0.86;
+  letter-spacing: -0.08em;
 }
 
-h2 {
-  margin-bottom: 0;
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
-}
+h2 { margin-bottom: 0; font-size: clamp(1.2rem, 2.6vw, 1.75rem); }
+h3 { margin-bottom: 8px; }
 
 .lede {
   max-width: 760px;
   color: var(--muted);
   font-size: 1.12rem;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
-.eyebrow,
-.label {
-  color: var(--accent-2);
-  font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+.briefing-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 14px 0 22px;
+}
+
+.briefing-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.briefing-meta div,
+.treaty-card,
+.advisor-card {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--panel-soft);
+  padding: 14px;
+}
+
+.briefing-meta strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.08rem;
+}
+
+.briefing-art {
+  overflow: hidden;
+  border-radius: 32px;
+}
+
+.briefing-art img {
+  display: block;
+  width: 100%;
+  height: 390px;
+  object-fit: cover;
+}
+
+.briefing-side-content {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+}
+
+.advisor-card {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.advisor-card img {
+  width: 72px;
+  height: 72px;
+}
+
+.advisor-card p,
+.treaty-card p,
+.card p,
+.objective-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.5;
 }
 
 .primary-button,
 .secondary-button,
+.ghost-button,
 .card-button {
   border: 1px solid var(--border);
   border-radius: 999px;
   color: var(--text);
   cursor: pointer;
-  font-weight: 800;
+  font-weight: 900;
   transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
 }
 
 .primary-button,
-.secondary-button {
-  padding: 14px 20px;
-}
+.secondary-button,
+.ghost-button { padding: 13px 18px; }
 
 .primary-button {
-  flex: 0 0 auto;
   background: linear-gradient(135deg, var(--accent), #8f2f2a);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 16px 36px rgba(211, 76, 63, 0.22);
 }
 
 .secondary-button,
-.card-button {
-  background: var(--panel-strong);
-}
+.card-button { background: var(--panel-strong); }
+
+.ghost-button { background: transparent; }
 
 .primary-button:hover,
 .secondary-button:hover,
+.ghost-button:hover,
 .card-button:hover,
 .region:hover {
   transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.34);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
 .game-shell {
@@ -130,113 +268,154 @@ h2 {
 }
 
 .panel {
-  border: 1px solid var(--border);
   border-radius: 24px;
-  background: rgba(26, 32, 45, 0.84);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.24);
   padding: 22px;
-  backdrop-filter: blur(12px);
 }
 
-.status-panel {
+.command-bar {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: 1.2fr repeat(4, minmax(130px, 1fr));
   gap: 12px;
 }
 
-.status-panel div {
-  border-radius: 18px;
-  background: var(--panel-strong);
-  padding: 14px;
+.command-summary,
+.stat-card {
+  border-radius: 20px;
+  padding: 16px;
 }
 
-.status-panel strong {
+.command-summary {
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(211, 76, 63, 0.2), rgba(91, 143, 217, 0.08));
+}
+
+.command-summary p { margin-bottom: 0; color: var(--muted); line-height: 1.45; }
+
+.stat-card strong {
   display: block;
-  margin-top: 5px;
-  font-size: 1.4rem;
+  margin-top: 6px;
+  font-size: 1.55rem;
 }
 
-.grid-two {
+.progress-track {
+  height: 9px;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  transition: width 220ms ease;
+}
+
+.dashboard-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.95fr);
+  gap: 18px;
+}
+
+.sidebar-grid {
+  display: grid;
   gap: 18px;
 }
 
 .section-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
   margin-bottom: 16px;
 }
 
-.card-list {
+.section-heading p { margin-bottom: 0; }
+
+.card-list,
+.objective-list,
+.faction-list {
   display: grid;
   gap: 12px;
 }
 
-.card {
+.card,
+.objective-card {
   border: 1px solid var(--border);
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--panel-soft);
   padding: 16px;
 }
 
-.card h3 {
-  margin: 0 0 8px;
-}
-
-.card p {
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-.card-button {
-  padding: 10px 14px;
-}
-
-.card-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.45;
-  transform: none;
-}
-
-.compact .card {
+.card {
   display: grid;
   grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 10px;
+  align-items: start;
+  gap: 16px;
 }
 
-.map {
-  position: relative;
-  min-height: 380px;
+.card h3 { margin-bottom: 8px; }
+.card p { max-width: 62ch; }
+
+.card-button { padding: 10px 14px; white-space: nowrap; }
+.card-button:disabled { cursor: not-allowed; opacity: 0.45; transform: none; }
+
+.focus-card.active {
+  border-color: rgba(240, 184, 79, 0.55);
+  background: rgba(240, 184, 79, 0.08);
+}
+
+.focus-effects {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.effect-pill {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.map-card {
+  overflow: hidden;
+  padding: 0;
+}
+
+.map-card .section-heading { padding: 22px 22px 0; }
+
+.theater-image {
+  width: 100%;
+  padding: 0 22px 18px;
+}
+
+.theater-image img {
+  display: block;
+  width: 100%;
   border: 1px solid var(--border);
   border-radius: 22px;
-  overflow: hidden;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.07), transparent),
-    #151b25;
+}
+
+.map-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 0 22px 16px;
 }
 
 .region {
-  position: absolute;
-  display: grid;
-  width: 92px;
-  height: 70px;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
   color: white;
   cursor: pointer;
+  padding: 10px;
   font-weight: 900;
   transition: transform 160ms ease, border-color 160ms ease;
 }
-
-.region:nth-child(1) { left: 10%; top: 22%; }
-.region:nth-child(2) { left: 24%; top: 52%; }
-.region:nth-child(3) { left: 43%; top: 48%; }
-.region:nth-child(4) { left: 57%; top: 42%; }
-.region:nth-child(5) { left: 70%; top: 45%; }
-.region:nth-child(6) { left: 49%; top: 12%; }
-.region:nth-child(7) { left: 74%; top: 18%; }
-.region:nth-child(8) { left: 59%; top: 68%; }
 
 .nato { background: rgba(91, 143, 217, 0.72); }
 .pact { background: rgba(211, 76, 63, 0.74); }
@@ -245,146 +424,261 @@ h2 {
 .danger { background: rgba(142, 114, 214, 0.72); }
 
 .intel-box {
-  margin: 14px 0 0;
+  margin: 0 22px 22px;
   border-left: 4px solid var(--accent-2);
+  border-radius: 12px;
   padding: 12px 14px;
   color: var(--muted);
   background: rgba(255, 255, 255, 0.04);
 }
 
+.faction-row {
+  display: grid;
+  gap: 8px;
+}
+
+.faction-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.faction-header strong { color: var(--text); }
+
 .event-log {
   display: grid;
-  max-height: 316px;
-  min-height: 260px;
+  max-height: 300px;
+  min-height: 220px;
   gap: 10px;
-  margin: 0 0 16px;
+  margin: 0;
   padding-left: 22px;
   overflow: auto;
   color: var(--muted);
 }
 
-.event-log li::marker {
-  color: var(--accent-2);
-  font-weight: 900;
+.event-log li::marker { color: var(--accent-2); font-weight: 900; }
+
+.toast {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 5;
+  max-width: 360px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: rgba(15, 20, 30, 0.94);
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 180ms ease, transform 180ms ease;
 }
 
-@media (max-width: 860px) {
-  .hero,
-  .grid-two {
-    grid-template-columns: 1fr;
-  }
+.toast.visible { opacity: 1; transform: translateY(0); }
 
-  .hero {
-    display: grid;
-  }
+@media (max-width: 980px) {
+  .briefing-screen,
+  .dashboard-grid,
+  .command-bar { grid-template-columns: 1fr; }
+  .briefing-copy { min-height: auto; }
+  .briefing-art img { height: 300px; }
+}
 
-  .status-panel {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .primary-button {
-    width: 100%;
-  }
+@media (max-width: 660px) {
+  .app-header,
+  .section-heading,
+  .card { align-items: stretch; flex-direction: column; }
+  .app-header { display: grid; }
+  .header-actions,
+  .briefing-actions { justify-content: stretch; }
+  .header-actions button,
+  .briefing-actions button,
+  .card-button { width: 100%; }
+  .briefing-meta,
+  .map-controls { grid-template-columns: 1fr 1fr; }
+  .advisor-card { grid-template-columns: 1fr; text-align: center; }
+  .advisor-card img { margin-inline: auto; }
 }
     </style>
   </head>
   <body>
-    <header class="hero">
-      <div>
-        <p class="eyebrow">Browser grand strategy prototype</p>
-        <h1>Ashes of the Cold War</h1>
-        <p class="lede">
-          World War III has begun. The United States is wounded, Moscow is
-          gambling on a decisive European realignment, and Germany stands
-          between survival, sovereignty, and catastrophe.
-        </p>
+    <header class="app-header">
+      <div class="brand">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiAgPHRpdGxlIGlkPSJ0aXRsZSI+RW1lcmdlbmN5IGNvdW5jaWwgc2VhbDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPkEgY2lyY3VsYXIgc2VhbCB3aXRoIGFuIGVhZ2xlLWluc3BpcmVkIG1hcmsgYW5kIGNyaXNpcyBzdGFycy48L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InNlYWwiIHgxPSIwIiB4Mj0iMSIgeTE9IjAiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBiODRmIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2QzNGMzZiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iMTI4IiBjeT0iMTI4IiByPSIxMTgiIGZpbGw9IiMxMDEzMWEiIHN0cm9rZT0idXJsKCNzZWFsKSIgc3Ryb2tlLXdpZHRoPSIxMCIvPgogIDxjaXJjbGUgY3g9IjEyOCIgY3k9IjEyOCIgcj0iODgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2YyZjVmOSIgc3Ryb2tlLW9wYWNpdHk9IjAuMTgiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik00NyAxMTYgQzc4IDk2IDEwMSAxMDIgMTI4IDEyOCBDMTU1IDEwMiAxNzggOTYgMjA5IDExNiBDMTg0IDEzMCAxNjQgMTQ4IDE1NCAxODEgQzE0MyAxNjUgMTM2IDE1MCAxMjggMTQwIEMxMjAgMTUwIDExMyAxNjUgMTAyIDE4MSBDOTIgMTQ4IDcyIDEzMCA0NyAxMTYgWiIgZmlsbD0idXJsKCNzZWFsKSIvPgogIDxwYXRoIGQ9Ik05MyA3OSBMMTI4IDQzIEwxNjMgNzkgTDE0NSA3OSBMMTQ1IDExMCBMMTExIDExMCBMMTExIDc5IFoiIGZpbGw9IiM1YjhmZDkiLz4KICA8ZyBmaWxsPSIjZjJmNWY5IiBvcGFjaXR5PSIwLjg1Ij4KICAgIDxjaXJjbGUgY3g9IjcwIiBjeT0iMTkwIiByPSI1Ii8+PGNpcmNsZSBjeD0iOTYiIGN5PSIyMDciIHI9IjUiLz48Y2lyY2xlIGN4PSIxMjgiIGN5PSIyMTQiIHI9IjUiLz48Y2lyY2xlIGN4PSIxNjAiIGN5PSIyMDciIHI9IjUiLz48Y2lyY2xlIGN4PSIxODYiIGN5PSIxOTAiIHI9IjUiLz4KICA8L2c+Cjwvc3ZnPgo=" alt="German Emergency Council seal" />
+        <div>
+          <p class="brand-title">Ashes of the Cold War</p>
+          <span class="brand-subtitle">Emergency government simulator</span>
+        </div>
       </div>
-      <button id="new-game" class="primary-button">Begin Emergency Session</button>
+      <div class="header-actions">
+        <button id="briefing-toggle" class="ghost-button">Briefing</button>
+        <button id="new-game" class="secondary-button">New Game</button>
+      </div>
     </header>
 
-    <main class="game-shell">
-      <section class="panel status-panel" aria-label="National status">
-        <div>
+    <section id="briefing-screen" class="briefing-screen">
+      <article class="briefing-copy">
+        <p class="eyebrow">November 1983 · Bonn Emergency Bunker</p>
+        <h1>Hold Germany together.</h1>
+        <p class="lede">
+          World War III has begun. The United States is wounded, Moscow is gambling on a decisive European realignment,
+          and Germany must choose between NATO, Soviet guarantees, or a dangerous third way.
+        </p>
+        <div class="briefing-actions">
+          <button id="start-session" class="primary-button">Enter Situation Room</button>
+          <button id="skip-briefing" class="ghost-button">Skip Briefing</button>
+        </div>
+        <div class="briefing-meta" aria-label="Scenario summary">
+          <div>
+            <span class="small-label">Scenario</span>
+            <strong>The First Strike</strong>
+          </div>
+          <div>
+            <span class="small-label">Playable</span>
+            <strong>West Germany</strong>
+          </div>
+          <div>
+            <span class="small-label">Turn Length</span>
+            <strong>1 Month</strong>
+          </div>
+        </div>
+      </article>
+
+      <aside class="briefing-art" aria-label="Visual briefing">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDcyMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIGRlc2MiPgogIDx0aXRsZSBpZD0idGl0bGUiPkNvbGQgV2FyIGNvbW1hbmQgcm9vbTwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPkEgc3R5bGl6ZWQgZW1lcmdlbmN5IGNvbW1hbmQgcm9vbSBvdmVybG9va2luZyBhIGdsb3dpbmcgc3RyYXRlZ2ljIG1hcCBvZiBFdXJvcGUuPC9kZXNjPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJza3kiIHgxPSIwIiB4Mj0iMSIgeTE9IjAiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTExODI3Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMC40OCIgc3RvcC1jb2xvcj0iIzFjMjYzNyIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMzNTFiMjIiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9Imdsb3ciIGN4PSI1MCUiIGN5PSI2MyUiIHI9IjQ4JSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2YwYjg0ZiIgc3RvcC1vcGFjaXR5PSIwLjc1Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMC40NSIgc3RvcC1jb2xvcj0iI2QzNGMzZiIgc3RvcC1vcGFjaXR5PSIwLjI2Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzEwMTMxYSIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciIgeD0iLTIwJSIgeT0iLTIwJSIgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSI+CiAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjEwIi8+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNzIwIiBmaWxsPSJ1cmwoI3NreSkiLz4KICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI3MjAiIGZpbGw9InVybCgjZ2xvdykiLz4KICA8cGF0aCBkPSJNMCA0MzAgTDEyMDAgMzAwIEwxMjAwIDcyMCBMMCA3MjAgWiIgZmlsbD0iIzBiMTAxOCIgb3BhY2l0eT0iMC44NiIvPgogIDxwYXRoIGQ9Ik0xNDAgNDkwIEMyNzAgNDI2IDQzMCA0MjAgNTYwIDQ3MCBDNzAwIDUyNSA4MjAgNDY4IDEwMDAgNDI2IiBmaWxsPSJub25lIiBzdHJva2U9IiM1YjhmZDkiIHN0cm9rZS13aWR0aD0iNSIgb3BhY2l0eT0iMC42NSIvPgogIDxwYXRoIGQ9Ik0xOTAgNTU1IEMzODAgNDg1IDQ3MCA1NzAgNjIwIDUyNSBDNzYwIDQ4NCA4NTAgNTMwIDEwMzIgNDcwIiBmaWxsPSJub25lIiBzdHJva2U9IiNkMzRjM2YiIHN0cm9rZS13aWR0aD0iNSIgb3BhY2l0eT0iMC42MiIvPgogIDxnIG9wYWNpdHk9IjAuOSI+CiAgICA8ZWxsaXBzZSBjeD0iNjEwIiBjeT0iNTcwIiByeD0iMzMwIiByeT0iNzIiIGZpbGw9IiMxODIxMzIiIHN0cm9rZT0iI2YwYjg0ZiIgc3Ryb2tlLW9wYWNpdHk9IjAuNDUiIHN0cm9rZS13aWR0aD0iNCIvPgogICAgPGVsbGlwc2UgY3g9IjYxMCIgY3k9IjU3MCIgcng9IjI4MCIgcnk9IjQ4IiBmaWxsPSJub25lIiBzdHJva2U9IiM1YjhmZDkiIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBzdHJva2Utd2lkdGg9IjMiLz4KICAgIDxwYXRoIGQ9Ik0zMzUgNTY2IEg4ODUiIHN0cm9rZT0iI2YwYjg0ZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMzIiLz4KICAgIDxwYXRoIGQ9Ik02MTAgNTAwIFY2NDAiIHN0cm9rZT0iI2YwYjg0ZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMzIiLz4KICA8L2c+CiAgPGcgZmlsdGVyPSJ1cmwoI2JsdXIpIiBvcGFjaXR5PSIwLjQ1Ij4KICAgIDxjaXJjbGUgY3g9Ijc3MCIgY3k9IjQyMCIgcj0iMzAiIGZpbGw9IiNkMzRjM2YiLz4KICAgIDxjaXJjbGUgY3g9IjUyMCIgY3k9IjQ2MiIgcj0iMjIiIGZpbGw9IiNmMGI4NGYiLz4KICAgIDxjaXJjbGUgY3g9IjkyMCIgY3k9IjUwMiIgcj0iMTgiIGZpbGw9IiM1YjhmZDkiLz4KICA8L2c+CiAgPGcgZmlsbD0iIzEwMTMxYSIgc3Ryb2tlPSIjMzg0NDVhIiBzdHJva2Utd2lkdGg9IjMiPgogICAgPHJlY3QgeD0iMTE1IiB5PSIxODAiIHdpZHRoPSIxOTAiIGhlaWdodD0iMTE1IiByeD0iMTIiLz4KICAgIDxyZWN0IHg9Ijg5NSIgeT0iMTUwIiB3aWR0aD0iMjA1IiBoZWlnaHQ9IjEyNiIgcng9IjEyIi8+CiAgICA8cmVjdCB4PSI0MzUiIHk9IjEyMCIgd2lkdGg9IjMzMCIgaGVpZ2h0PSIxNjUiIHJ4PSIxNCIvPgogIDwvZz4KICA8ZyBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmMmY1ZjkiPgogICAgPHRleHQgeD0iNDY4IiB5PSIxNzgiIGZvbnQtc2l6ZT0iMjgiPkRFRkNPTjwvdGV4dD4KICAgIDx0ZXh0IHg9IjQ2OCIgeT0iMjI0IiBmb250LXNpemU9IjU0IiBmaWxsPSIjZDM0YzNmIj4zPC90ZXh0PgogICAgPHRleHQgeD0iMTQ2IiB5PSIyMzIiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiM1YjhmZDkiPk5BVE8gTElOSzwvdGV4dD4KICAgIDx0ZXh0IHg9IjkzMCIgeT0iMjEyIiBmb250LXNpemU9IjI0IiBmaWxsPSIjZjBiODRmIj5FVVJPUEU8L3RleHQ+CiAgPC9nPgo8L3N2Zz4K" alt="A stylized Cold War command room with a glowing strategic map" />
+        <div class="briefing-side-content">
+          <div class="advisor-card">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiAgPHRpdGxlIGlkPSJ0aXRsZSI+RW1lcmdlbmN5IGNvdW5jaWwgc2VhbDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPkEgY2lyY3VsYXIgc2VhbCB3aXRoIGFuIGVhZ2xlLWluc3BpcmVkIG1hcmsgYW5kIGNyaXNpcyBzdGFycy48L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InNlYWwiIHgxPSIwIiB4Mj0iMSIgeTE9IjAiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBiODRmIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2QzNGMzZiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iMTI4IiBjeT0iMTI4IiByPSIxMTgiIGZpbGw9IiMxMDEzMWEiIHN0cm9rZT0idXJsKCNzZWFsKSIgc3Ryb2tlLXdpZHRoPSIxMCIvPgogIDxjaXJjbGUgY3g9IjEyOCIgY3k9IjEyOCIgcj0iODgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2YyZjVmOSIgc3Ryb2tlLW9wYWNpdHk9IjAuMTgiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik00NyAxMTYgQzc4IDk2IDEwMSAxMDIgMTI4IDEyOCBDMTU1IDEwMiAxNzggOTYgMjA5IDExNiBDMTg0IDEzMCAxNjQgMTQ4IDE1NCAxODEgQzE0MyAxNjUgMTM2IDE1MCAxMjggMTQwIEMxMjAgMTUwIDExMyAxNjUgMTAyIDE4MSBDOTIgMTQ4IDcyIDEzMCA0NyAxMTYgWiIgZmlsbD0idXJsKCNzZWFsKSIvPgogIDxwYXRoIGQ9Ik05MyA3OSBMMTI4IDQzIEwxNjMgNzkgTDE0NSA3OSBMMTQ1IDExMCBMMTExIDExMCBMMTExIDc5IFoiIGZpbGw9IiM1YjhmZDkiLz4KICA8ZyBmaWxsPSIjZjJmNWY5IiBvcGFjaXR5PSIwLjg1Ij4KICAgIDxjaXJjbGUgY3g9IjcwIiBjeT0iMTkwIiByPSI1Ii8+PGNpcmNsZSBjeD0iOTYiIGN5PSIyMDciIHI9IjUiLz48Y2lyY2xlIGN4PSIxMjgiIGN5PSIyMTQiIHI9IjUiLz48Y2lyY2xlIGN4PSIxNjAiIGN5PSIyMDciIHI9IjUiLz48Y2lyY2xlIGN4PSIxODYiIGN5PSIxOTAiIHI9IjUiLz4KICA8L2c+Cjwvc3ZnPgo=" alt="Emergency council seal" />
+            <div>
+              <span class="small-label">Council Directive</span>
+              <h3>Prevent collapse before choosing a side.</h3>
+              <p>Keep stability above 35%, control escalation, and build enough political capital to define Germany's future.</p>
+            </div>
+          </div>
+          <div class="treaty-card">
+            <span class="small-label">Primary tension</span>
+            <p>NATO needs German corridors. Moscow offers reunification talks. The public wants shelters, fuel, and answers.</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <main id="game-shell" class="game-shell hidden">
+      <section class="command-bar" aria-label="National status">
+        <div class="command-summary">
+          <span class="label">Current Objective</span>
+          <h2 id="current-objective">Stabilize the Federal Republic</h2>
+          <p id="objective-detail">Complete a focus or cabinet action, then advance the month to see the crisis evolve.</p>
+        </div>
+        <div class="stat-card">
           <span class="label">Turn</span>
           <strong id="turn">1</strong>
+          <span id="date" class="brand-subtitle">Nov 1983</span>
         </div>
-        <div>
-          <span class="label">Date</span>
-          <strong id="date">Nov 1983</strong>
-        </div>
-        <div>
+        <div class="stat-card">
           <span class="label">Political Power</span>
           <strong id="political-power">45</strong>
+          <div class="progress-track"><span id="power-bar" class="progress-fill"></span></div>
         </div>
-        <div>
+        <div class="stat-card">
           <span class="label">Stability</span>
           <strong id="stability">58%</strong>
+          <div class="progress-track"><span id="stability-bar" class="progress-fill"></span></div>
         </div>
-        <div>
-          <span class="label">War Support</span>
-          <strong id="war-support">42%</strong>
-        </div>
-        <div>
+        <div class="stat-card">
           <span class="label">Escalation</span>
           <strong id="escalation">36%</strong>
+          <div class="progress-track"><span id="escalation-bar" class="progress-fill"></span></div>
         </div>
       </section>
 
-      <section class="grid-two">
-        <article class="panel">
-          <div class="section-heading">
-            <p class="eyebrow">German Emergency Council</p>
-            <h2>Choose a national direction</h2>
-          </div>
-          <p>
-            Each focus advances the political story and shifts your national
-            position. Pick carefully: Germany's path can strengthen NATO,
-            invite Soviet guarantees, or create a third European bloc.
-          </p>
-          <div id="focus-list" class="card-list"></div>
-        </article>
+      <section class="dashboard-grid">
+        <div class="main-column">
+          <article class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">German Emergency Council</p>
+                <h2>Choose a national focus</h2>
+              </div>
+              <p>Focuses shape the campaign path and unlock stronger positions later.</p>
+            </div>
+            <div id="focus-list" class="card-list"></div>
+          </article>
 
-        <article class="panel map-panel">
-          <div class="section-heading">
-            <p class="eyebrow">Strategic map</p>
-            <h2>Europe after the first strike</h2>
-          </div>
-          <div class="map" aria-label="Simplified strategic map of Europe">
-            <button class="region nato" data-region="United Kingdom">UK</button>
-            <button class="region nato" data-region="France">FR</button>
-            <button class="region contested" data-region="West Germany">WG</button>
-            <button class="region pact" data-region="East Germany">EG</button>
-            <button class="region pact" data-region="Poland">PL</button>
-            <button class="region neutral" data-region="Scandinavia">SC</button>
-            <button class="region pact" data-region="Baltics">BA</button>
-            <button class="region danger" data-region="Fallout corridor">☢</button>
-          </div>
-          <p id="region-detail" class="intel-box">
-            Select a region to inspect its current strategic situation.
-          </p>
-        </article>
-      </section>
+          <article class="panel map-card">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Strategic map</p>
+                <h2>European theater</h2>
+              </div>
+              <p>Select a region for intelligence.</p>
+            </div>
+            <div class="theater-image">
+              <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5MDAgNTYwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiAgPHRpdGxlIGlkPSJ0aXRsZSI+RXVyb3BlYW4gdGhlYXRlciBtYXA8L3RpdGxlPgogIDxkZXNjIGlkPSJkZXNjIj5BIHN0eWxpemVkIHN0cmF0ZWdpYyB0aGVhdGVyIG1hcCB3aXRoIE5BVE8sIFdhcnNhdyBQYWN0LCBuZXV0cmFsLCBhbmQgZmFsbG91dCB6b25lcy48L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Im9jZWFuIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzEwMTgyNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxODI0M2EiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8ZmlsdGVyIGlkPSJzaGFkb3ciIHg9Ii0yMCUiIHk9Ii0yMCUiIHdpZHRoPSIxNDAlIiBoZWlnaHQ9IjE0MCUiPgogICAgICA8ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMTIiIHN0ZERldmlhdGlvbj0iMTQiIGZsb29kLWNvbG9yPSIjMDAwIiBmbG9vZC1vcGFjaXR5PSIwLjM1Ii8+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjkwMCIgaGVpZ2h0PSI1NjAiIHJ4PSIyOCIgZmlsbD0idXJsKCNvY2VhbikiLz4KICA8ZyBvcGFjaXR5PSIwLjI4IiBzdHJva2U9IiNmMmY1ZjkiIHN0cm9rZS13aWR0aD0iMSI+CiAgICA8cGF0aCBkPSJNMCA5MCBIOTAwTTAgMTgwIEg5MDBNMCAyNzAgSDkwME0wIDM2MCBIOTAwTTAgNDUwIEg5MDAiLz4KICAgIDxwYXRoIGQ9Ik0xMTAgMCBWNTYwTTIyMCAwIFY1NjBNMzMwIDAgVjU2ME00NDAgMCBWNTYwTTU1MCAwIFY1NjBNNjYwIDAgVjU2ME03NzAgMCBWNTYwIi8+CiAgPC9nPgogIDxnIGZpbHRlcj0idXJsKCNzaGFkb3cpIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjE4IiBzdHJva2Utd2lkdGg9IjMiPgogICAgPHBhdGggZD0iTTEyMCAyMzAgTDE5MCAxNzUgTDI0NSAyMTAgTDIzMCAzMDAgTDE2MCAzMzAgWiIgZmlsbD0iIzM4NjhhOCIvPgogICAgPHBhdGggZD0iTTIzMCAzMTAgTDMyMCAyNjAgTDM4MCAzMjAgTDM0NSA0MTAgTDI0NSA0MTUgWiIgZmlsbD0iIzM4NjhhOCIvPgogICAgPHBhdGggZD0iTTM5MCAyNTUgTDUwMCAyMzUgTDU0NSAzMzUgTDQ3MCA0MDUgTDM3MiAzNTUgWiIgZmlsbD0iI2M4OTQzZiIvPgogICAgPHBhdGggZD0iTTUzNSAyMjAgTDY0MiAyMDUgTDY5MCAyOTAgTDY1MCAzODUgTDU0NSAzMzggWiIgZmlsbD0iIzlmMzcyZiIvPgogICAgPHBhdGggZD0iTTY2MCAxOTAgTDgwMCAxNzggTDgzMCAzMzAgTDcwMCAzODIgTDY4MiAyODIgWiIgZmlsbD0iIzlmMzcyZiIvPgogICAgPHBhdGggZD0iTTQyMCA3MiBMNTgwIDQ4IEw2OTAgMTIyIEw2NDAgMTkyIEw0NzAgMTc4IFoiIGZpbGw9IiMzZDhhNjIiLz4KICAgIDxwYXRoIGQ9Ik03MTggNjQgTDgzNSA5MiBMODI4IDE2OCBMNjkwIDE0MiBaIiBmaWxsPSIjOWYzNzJmIi8+CiAgPC9nPgogIDxnIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjgwMCIgZm9udC1zaXplPSIyMiIgZmlsbD0iI2YyZjVmOSI+CiAgICA8dGV4dCB4PSIxNTAiIHk9IjI2MCI+VUs8L3RleHQ+CiAgICA8dGV4dCB4PSIyODUiIHk9IjM1MCI+RlI8L3RleHQ+CiAgICA8dGV4dCB4PSI0MzMiIHk9IjMyMCI+V0c8L3RleHQ+CiAgICA8dGV4dCB4PSI1NzgiIHk9IjMwMCI+RUc8L3RleHQ+CiAgICA8dGV4dCB4PSI3MzUiIHk9IjI5MiI+UEw8L3RleHQ+CiAgICA8dGV4dCB4PSI1MjAiIHk9IjEzNSI+U0M8L3RleHQ+CiAgICA8dGV4dCB4PSI3MzUiIHk9IjEyNiI+QkE8L3RleHQ+CiAgPC9nPgogIDxnIG9wYWNpdHk9IjAuOSI+CiAgICA8cGF0aCBkPSJNNDU1IDQ0NCBDNTQwIDM5MCA2MjYgNDIwIDcwNSAzNzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhlNzJkNiIgc3Ryb2tlLXdpZHRoPSIyMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2Utb3BhY2l0eT0iMC4yOCIvPgogICAgPHBhdGggZD0iTTQ1NSA0NDQgQzU0MCAzOTAgNjI2IDQyMCA3MDUgMzcwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWI2ZmYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSIxMCAxNCIvPgogICAgPHRleHQgeD0iNTE1IiB5PSI0NzAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjgwMCIgZm9udC1zaXplPSIyMCIgZmlsbD0iI2M5YjZmZiI+RkFMTE9VVCBDT1JSSURPUjwvdGV4dD4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDIgNDQyKSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmaWxsPSIjZjJmNWY5Ij4KICAgIDxyZWN0IHdpZHRoPSIyNjUiIGhlaWdodD0iNzYiIHJ4PSIxNiIgZmlsbD0iIzBiMTAxOCIgb3BhY2l0eT0iMC43OCIvPgogICAgPGNpcmNsZSBjeD0iMjgiIGN5PSIyNCIgcj0iOCIgZmlsbD0iIzM4NjhhOCIvPjx0ZXh0IHg9IjQ0IiB5PSIzMCI+TkFUTy1hbGlnbmVkPC90ZXh0PgogICAgPGNpcmNsZSBjeD0iMjgiIGN5PSI1MiIgcj0iOCIgZmlsbD0iIzlmMzcyZiIvPjx0ZXh0IHg9IjQ0IiB5PSI1OCI+V2Fyc2F3IFBhY3QgcHJlc3N1cmU8L3RleHQ+CiAgPC9nPgo8L3N2Zz4K" alt="Stylized strategic theater map of Europe" />
+            </div>
+            <div class="map-controls" aria-label="Region controls">
+              <button class="region nato" data-region="United Kingdom">UK</button>
+              <button class="region nato" data-region="France">France</button>
+              <button class="region contested" data-region="West Germany">West Germany</button>
+              <button class="region pact" data-region="East Germany">East Germany</button>
+              <button class="region pact" data-region="Poland">Poland</button>
+              <button class="region neutral" data-region="Scandinavia">Scandinavia</button>
+              <button class="region pact" data-region="Baltics">Baltics</button>
+              <button class="region danger" data-region="Fallout corridor">Fallout</button>
+            </div>
+            <p id="region-detail" class="intel-box">Select a region to inspect its current strategic situation.</p>
+          </article>
+        </div>
 
-      <section class="grid-two">
-        <article class="panel">
-          <div class="section-heading">
-            <p class="eyebrow">Cabinet actions</p>
-            <h2>Spend political power</h2>
-          </div>
-          <div id="action-list" class="card-list compact"></div>
-        </article>
+        <aside class="sidebar-grid">
+          <article class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Cabinet actions</p>
+                <h2>Spend political power</h2>
+              </div>
+            </div>
+            <div id="action-list" class="card-list"></div>
+          </article>
 
-        <article class="panel">
-          <div class="section-heading">
-            <p class="eyebrow">Situation room</p>
-            <h2>Event log</h2>
-          </div>
-          <ol id="event-log" class="event-log"></ol>
-          <button id="next-turn" class="secondary-button">Advance One Month</button>
-        </article>
+          <article class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Internal politics</p>
+                <h2>Faction pressure</h2>
+              </div>
+            </div>
+            <div id="faction-list" class="faction-list"></div>
+          </article>
+
+          <article class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Objectives</p>
+                <h2>Crisis priorities</h2>
+              </div>
+            </div>
+            <div id="objective-list" class="objective-list"></div>
+          </article>
+
+          <article class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Situation room</p>
+                <h2>Event log</h2>
+              </div>
+              <button id="next-turn" class="primary-button">Advance Month</button>
+            </div>
+            <ol id="event-log" class="event-log"></ol>
+          </article>
+        </aside>
       </section>
     </main>
 
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script>
 const initialState = {
   turn: 1,
@@ -394,22 +688,26 @@ const initialState = {
   warSupport: 42,
   escalation: 36,
   completedFocuses: [],
+  factions: {
+    natoLoyalists: 52,
+    neutralists: 47,
+    sovietEnvoys: 24,
+    reunificationBloc: 38,
+  },
   eventLog: [
     "Emergency broadcasts confirm a limited nuclear exchange. Bonn convenes an all-party survival cabinet.",
     "Moscow offers security guarantees if Germany abandons NATO logistics corridors.",
   ],
 };
 
-const months = [
-  "Nov 1983",
-  "Dec 1983",
-  "Jan 1984",
-  "Feb 1984",
-  "Mar 1984",
-  "Apr 1984",
-  "May 1984",
-  "Jun 1984",
-];
+const months = ["Nov 1983", "Dec 1983", "Jan 1984", "Feb 1984", "Mar 1984", "Apr 1984", "May 1984", "Jun 1984"];
+
+const factionLabels = {
+  natoLoyalists: "NATO Loyalists",
+  neutralists: "Neutralists",
+  sovietEnvoys: "Soviet Negotiators",
+  reunificationBloc: "Reunification Bloc",
+};
 
 const focuses = [
   {
@@ -417,7 +715,8 @@ const focuses = [
     title: "Restore Federal Command",
     description: "Reconnect state governments, emergency services, and Bundeswehr commanders under a single crisis authority.",
     cost: 20,
-    effects: { stability: 8, warSupport: 2 },
+    effects: { stability: 8, warSupport: 2, factions: { neutralists: 4, reunificationBloc: -2 } },
+    objective: "Federal command channels restored",
     log: "Federal command channels are restored. Regional leaders cautiously accept Bonn's emergency authority.",
   },
   {
@@ -425,7 +724,8 @@ const focuses = [
     title: "Open Secret Talks with Moscow",
     description: "Probe Soviet terms for German security, reunification, and survival outside the NATO chain of command.",
     cost: 25,
-    effects: { stability: -4, escalation: 5, warSupport: 6 },
+    effects: { stability: -4, escalation: 5, warSupport: 6, factions: { natoLoyalists: -8, sovietEnvoys: 14, reunificationBloc: 5 } },
+    objective: "Moscow channel opened",
     log: "Back-channel envoys cross into East Berlin. Rumors of Soviet guarantees unsettle NATO loyalists.",
   },
   {
@@ -433,7 +733,8 @@ const focuses = [
     title: "Rally the NATO Remnants",
     description: "Bind Britain, France, and surviving U.S. command nodes to a renewed defense of Central Europe.",
     cost: 25,
-    effects: { stability: -2, escalation: 3, warSupport: 10 },
+    effects: { stability: -2, escalation: 3, warSupport: 10, factions: { natoLoyalists: 13, neutralists: -5, sovietEnvoys: -4 } },
+    objective: "NATO corridor secured",
     log: "NATO air corridors reopen under heavy guard. Allied officers return to German planning rooms.",
   },
   {
@@ -441,7 +742,8 @@ const focuses = [
     title: "Propose a European Survival Pact",
     description: "Build an independent European bloc that can negotiate with both superpowers from a position of unity.",
     cost: 30,
-    effects: { stability: 4, escalation: -4, warSupport: -2 },
+    effects: { stability: 4, escalation: -4, warSupport: -2, factions: { neutralists: 12, natoLoyalists: -3, sovietEnvoys: -3 } },
+    objective: "European pact proposal drafted",
     log: "Paris and London receive a German proposal for a neutral European survival pact.",
   },
 ];
@@ -450,25 +752,25 @@ const actions = [
   {
     id: "rationing",
     title: "Emergency Rationing",
-    description: "+6 stability, costs 12 political power",
+    description: "+6 stability, costs 12 political power.",
     cost: 12,
-    effects: { stability: 6 },
+    effects: { stability: 6, factions: { neutralists: 2 } },
     log: "Ration books and fuel controls calm panic buying in major cities.",
   },
   {
     id: "mobilize",
     title: "Mobilize Territorial Defense",
-    description: "+8 war support, +2 escalation, costs 16 political power",
+    description: "+8 war support, +2 escalation, costs 16 political power.",
     cost: 16,
-    effects: { warSupport: 8, escalation: 2 },
+    effects: { warSupport: 8, escalation: 2, factions: { natoLoyalists: 4, reunificationBloc: 4 } },
     log: "Territorial defense units report for duty along rail hubs and border crossings.",
   },
   {
     id: "deescalate",
     title: "Backchannel De-escalation",
-    description: "-6 escalation, -2 war support, costs 18 political power",
+    description: "-6 escalation, -2 war support, costs 18 political power.",
     cost: 18,
-    effects: { escalation: -6, warSupport: -2 },
+    effects: { escalation: -6, warSupport: -2, factions: { neutralists: 5, natoLoyalists: -2 } },
     log: "Swiss intermediaries carry German de-escalation proposals to both nuclear blocs.",
   },
 ];
@@ -484,20 +786,42 @@ const regionIntel = {
   "Fallout corridor": "Danger zone. Tactical detonations and damaged reactors have made movement costly and politically explosive.",
 };
 
-let state = { ...initialState };
+let state = structuredClone(initialState);
+let toastTimeout;
 
 const clamp = (value) => Math.max(0, Math.min(100, value));
+const formatEffect = ([key, value]) => `${value > 0 ? "+" : ""}${value} ${key.replace(/([A-Z])/g, " $1").toLowerCase()}`;
 
 function applyEffects(effects) {
   state.stability = clamp(state.stability + (effects.stability ?? 0));
   state.warSupport = clamp(state.warSupport + (effects.warSupport ?? 0));
   state.escalation = clamp(state.escalation + (effects.escalation ?? 0));
+
+  Object.entries(effects.factions ?? {}).forEach(([key, value]) => {
+    state.factions[key] = clamp(state.factions[key] + value);
+  });
 }
 
 function spendPoliticalPower(cost) {
-  if (state.politicalPower < cost) return false;
+  if (state.politicalPower < cost) {
+    showToast(`Not enough political power. You need ${cost} PP.`);
+    return false;
+  }
   state.politicalPower -= cost;
   return true;
+}
+
+function showToast(message) {
+  const toast = document.querySelector("#toast");
+  toast.textContent = message;
+  toast.classList.add("visible");
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => toast.classList.remove("visible"), 2600);
+}
+
+function setGameVisible(isVisible) {
+  document.querySelector("#briefing-screen").classList.toggle("hidden", isVisible);
+  document.querySelector("#game-shell").classList.toggle("hidden", !isVisible);
 }
 
 function renderStatus() {
@@ -505,17 +829,26 @@ function renderStatus() {
   document.querySelector("#date").textContent = months[state.dateIndex % months.length];
   document.querySelector("#political-power").textContent = state.politicalPower;
   document.querySelector("#stability").textContent = `${state.stability}%`;
-  document.querySelector("#war-support").textContent = `${state.warSupport}%`;
   document.querySelector("#escalation").textContent = `${state.escalation}%`;
+  document.querySelector("#power-bar").style.width = `${Math.min(state.politicalPower, 100)}%`;
+  document.querySelector("#stability-bar").style.width = `${state.stability}%`;
+  document.querySelector("#escalation-bar").style.width = `${state.escalation}%`;
 }
 
-function createCard(item, buttonLabel, onClick, disabled = false) {
+function createCard(item, buttonLabel, onClick, disabled = false, className = "") {
   const card = document.createElement("div");
-  card.className = "card";
+  card.className = `card ${className}`.trim();
+  const effects = Object.entries(item.effects)
+    .filter(([key]) => key !== "factions")
+    .map(formatEffect)
+    .map((effect) => `<span class="effect-pill">${effect}</span>`)
+    .join("");
+
   card.innerHTML = `
     <div>
       <h3>${item.title}</h3>
       <p>${item.description}</p>
+      <div class="focus-effects">${effects}</div>
     </div>
   `;
 
@@ -546,9 +879,13 @@ function renderFocuses() {
           state.completedFocuses.push(focus.id);
           applyEffects(focus.effects);
           state.eventLog.unshift(focus.log);
+          document.querySelector("#current-objective").textContent = focus.objective;
+          document.querySelector("#objective-detail").textContent = "Advance the month to test the political consequences of this decision.";
+          showToast(focus.objective);
           render();
         },
         completed || unaffordable,
+        completed ? "focus-card active" : "focus-card",
       ),
     );
   });
@@ -567,11 +904,45 @@ function renderActions() {
           if (!spendPoliticalPower(action.cost)) return;
           applyEffects(action.effects);
           state.eventLog.unshift(action.log);
+          showToast(action.title);
           render();
         },
         state.politicalPower < action.cost,
       ),
     );
+  });
+}
+
+function renderFactions() {
+  const list = document.querySelector("#faction-list");
+  list.replaceChildren();
+
+  Object.entries(state.factions).forEach(([key, value]) => {
+    const row = document.createElement("div");
+    row.className = "faction-row";
+    row.innerHTML = `
+      <div class="faction-header"><strong>${factionLabels[key]}</strong><span>${value}%</span></div>
+      <div class="progress-track"><span class="progress-fill" style="width: ${value}%"></span></div>
+    `;
+    list.append(row);
+  });
+}
+
+function renderObjectives() {
+  const list = document.querySelector("#objective-list");
+  list.replaceChildren();
+
+  const objectives = [
+    { title: "Maintain stability", detail: `Keep stability above 35%. Current: ${state.stability}%`, complete: state.stability >= 35 },
+    { title: "Avoid uncontrolled escalation", detail: `Keep escalation below 70%. Current: ${state.escalation}%`, complete: state.escalation < 70 },
+    { title: "Define Germany's path", detail: `Complete 2 national focuses. Current: ${state.completedFocuses.length}/2`, complete: state.completedFocuses.length >= 2 },
+  ];
+
+  objectives.forEach((objective) => {
+    const card = document.createElement("div");
+    card.className = "objective-card";
+    card.innerHTML = `<h3>${objective.complete ? "✓" : "○"} ${objective.title}</h3><p>${objective.detail}</p>`;
+    list.append(card);
   });
 }
 
@@ -601,16 +972,16 @@ function advanceTurn() {
   ];
 
   state.eventLog.unshift(monthlyEvents[state.turn % monthlyEvents.length]);
+  showToast(`Advanced to ${months[state.dateIndex % months.length]}`);
   render();
 }
 
 function resetGame() {
-  state = {
-    ...initialState,
-    completedFocuses: [],
-    eventLog: [...initialState.eventLog],
-  };
+  state = structuredClone(initialState);
   document.querySelector("#region-detail").textContent = "Select a region to inspect its current strategic situation.";
+  document.querySelector("#current-objective").textContent = "Stabilize the Federal Republic";
+  document.querySelector("#objective-detail").textContent = "Complete a focus or cabinet action, then advance the month to see the crisis evolve.";
+  setGameVisible(false);
   render();
 }
 
@@ -618,11 +989,16 @@ function render() {
   renderStatus();
   renderFocuses();
   renderActions();
+  renderFactions();
+  renderObjectives();
   renderLog();
 }
 
 document.querySelector("#next-turn").addEventListener("click", advanceTurn);
 document.querySelector("#new-game").addEventListener("click", resetGame);
+document.querySelector("#start-session").addEventListener("click", () => setGameVisible(true));
+document.querySelector("#skip-briefing").addEventListener("click", () => setGameVisible(true));
+document.querySelector("#briefing-toggle").addEventListener("click", () => setGameVisible(false));
 
 document.querySelectorAll(".region").forEach((region) => {
   region.addEventListener("click", () => {
